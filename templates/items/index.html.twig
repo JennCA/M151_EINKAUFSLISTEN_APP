@@ -1,0 +1,97 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+	M151_EINKAUFSLISTEN_APP
+{% endblock %}
+{% block body %}
+	<section class="section container">
+		<h1 class="title has-text-centered">Einkaufliste
+			{{userName}}</h1>
+
+		<table class="table is-fullwidth">
+			<thead>
+				<tr>
+					<th>
+						<abbr>#</abbr>
+					</th>
+					<th>
+						<abbr>Anzahl</abbr>
+					</th>
+					<th>
+						<abbr>Name</abbr>
+					</th>
+					<th>
+						<abbr></abbr>
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for item in items %}
+					<tr>
+						<td>
+							{{item.id}}
+						</td>
+						<td>
+							{{item.amount}}
+						</td>
+						<td>
+							{{item.name}}
+						</td>
+						<td>
+							<div class="columns">
+								<div class="column">
+									<a href="/detail/{{item.id}}" class="button is-secondary">
+										<i class="fas fa-external-link-square-alt"></i>
+										Details
+									</a>
+								</div>
+								<div class="column">
+									<a href="/edit/{{item.id}}" class="button is-primary">
+										<i class="fas fa-edit"></i>
+										Editieren
+									</a>
+								</div>
+								<div class="column">
+									<a href="/remove/{{item.id}}" class="button is-danger">
+										<i class="fas fa-trash"></i>
+										Löschen
+									</a>
+								</div>
+							</div>
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+
+		<h2 class="title has-text-centered">Produkt hinzufügen</h2>
+		<div class="form">
+			{{ form_start(form) }}
+			<div class="field">
+				<div class="label">
+					{{ form_label(form.amount, "Anzahl") }}
+				</div>
+				<div class="control">
+					{{ form_widget(form.amount) }}
+				</div>
+			</div>
+
+			<div class="field">
+				<div class="control">
+					<div class="label">
+						{{ form_label(form.name, "Name") }}
+					</div>
+					<div class="control">
+						{{ form_widget(form.name) }}
+					</div>
+				</div>
+			</div>
+
+			<div class="field is-grouped">
+				<div class="control">
+					{{ form_row(form.submit, { 'label': 'Hinzufügen'}) }}
+				</div>
+			</div>
+			{{ form_end(form) }}
+		</div>
+	</div>
+</section>{% endblock %}

@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+	M151_EINKAUFSLISTEN_APP - Produkt Details
+{% endblock %}
+{% block body %}
+	<section class="section container has-text-centered">
+		<h1 class="title has-text-centered">
+			{{ item.name }}
+			Details
+		</h1>
+		<h2 class="subtitle">
+			Anzahl:
+			{{ item.amount }}
+		</h2>
+
+		<div class="columns">
+			<div class="column">
+				<a href="/" class="button is-secondary">
+					Zurück
+				</a>
+			</div>
+			<div class="column">
+				<a href="/edit/{{item.id}}" class="button is-primary">
+					<i class="fas fa-edit"></i>
+					Editieren
+				</a>
+			</div>
+			<div class="column">
+				<a href="/remove/{{item.id}}" class="button is-danger">
+					<i class="fas fa-trash"></i>
+					Löschen
+				</a>
+			</div>
+		</div>
+
+		<h3 class="title">Kommentare</h3>
+		{% for c in comments %}
+			<div class="box">
+				<article class="media">
+					<div class="media-content">
+						<div class="content">
+							<p>
+								{{c.comment}}
+							</p>
+						</div>
+					</div>
+				</article>
+			</div>
+		{% endfor %}
+
+		<div class="form">
+			{{ form_start(form) }}
+			<div class="field">
+				<div class="control">
+					<div class="label">
+						{{ form_label(form.comment, "Neuer Kommentar") }}
+					</div>
+					{{ form_widget(form.comment) }}
+				</div>
+			</div>
+
+			<div class="field is-grouped">
+				<div class="control">
+					{{ form_row(form.submit, { 'label': 'Senden'}) }}
+				</div>
+			</div>
+			{{ form_end(form) }}
+		</div>
+	</section>
+{% endblock %}
